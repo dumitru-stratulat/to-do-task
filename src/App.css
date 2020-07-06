@@ -1,38 +1,52 @@
-.App {
+.toDoAppContent {
+  display: flex;
+  border: 1px solid blue;
+}
+.todoCard-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  height: 200px;
+}
+.categoryCard-wrap {
+}
+.editTaskInput {
+  border: none;
+  outline: none;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.deleteCardButton-wrap {
+  width: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 5px;
+  margin-top: 5px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.deleteCardButton-wrap:hover {
+  background-color: blue;
+  color: white;
+  transition-duration: 0.3s;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.todoCard {
+  width: 300px;
+  text-align: center;
+  margin: 20px;
+  border: 1px solid blue;
+  border-radius: 10px;
+  box-shadow: -18px 10px 99px -30px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.categoryCard {
+  width: 200px;
+  text-align: center;
+  border: 1px solid blue;
+  border-radius: 10px;
+  box-shadow: -18px 10px 99px -30px;
+  margin: 5px;
+  cursor: pointer;
 }
 
 .App-link {
   color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

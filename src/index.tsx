@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import { App } from './App';
 import * as serviceWorker from './serviceWorker';
+import { Provider as ToDoProvider } from './context/ToDoContext'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ToDoProvider>
+      <App />
+    </ToDoProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
