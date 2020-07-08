@@ -27,14 +27,16 @@ export const ToDoModal: React.FC<ToDoModalProps> = ({ onAdd }) => {
         )
     }
     return (
-        <div>
+        <div className="modal-wrap">
             ToDoModal
-            <input ref={toDoTitleInput} type="text" placeholder="Add Title" defaultValue="Title" />
-            <input ref={descriptionInput} type="text" placeholder="Add description" defaultValue="Description" />
-            <input ref={optionalDescriptionInput} type="text" placeholder="Add optional description" defaultValue="optioal description" />
-            <input ref={priorityLevelInput} type="number" placeholder="Add optional description" defaultValue={1} />
-            <input type="button" name="Add ToDo" value="Add" onClick={addTaskHandler} />
-            <h3>Add category</h3>
+            <div className="modal">
+                <input ref={toDoTitleInput} type="text" placeholder="Add Title" defaultValue="Title" className="addTitleInput" />
+                <input ref={descriptionInput} type="text" placeholder="Add description" defaultValue="Description" />
+                <input ref={optionalDescriptionInput} type="text" placeholder="Add optional description" defaultValue="optioal description" />
+                <input ref={priorityLevelInput} type="number" placeholder="Add optional description" defaultValue={1} />
+                <input type="button" name="Add ToDo" value="Add" onClick={addTaskHandler} />
+                <h3>Add category</h3>
+            </div>
         </div>
     )
 }

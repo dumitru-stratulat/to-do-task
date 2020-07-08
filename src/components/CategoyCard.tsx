@@ -10,7 +10,7 @@ export const CategoryCard: React.FC<{ category: CategoryInterface }> = ({ catego
             <Link to={`/category/${category.id}`}>
                 <p>{category.title}</p>
                 {/* <p>{[category.createdAt]}</p> */}
-                <p>Created At:{category.createdAt.toLocaleTimeString('en-US')}</p>
+                <p>Created At:{category.createdAt.toLocaleTimeString('en-GB')}</p>
             </Link>
         </div>
     )

@@ -1,5 +1,6 @@
 import createDataContext from './createDataContext'
-import { get, addBook, getCategories as getCategoriesFromIndexedDB, addCategory as addCategoryInIndexedDB, deleteToDo as deleteToDoInIndexedDB } from './utils/indexedDb'
+import { ToDoInterface } from '../components/interfaces'
+import { get, getAllToDos, addBook, getCategories as getCategoriesFromIndexedDB, addCategory as addCategoryInIndexedDB, deleteToDo as deleteToDoInIndexedDB } from './utils/indexedDb'
 
 type Actions =
     | { type: 'get_todos'; payload: object }
@@ -35,6 +36,11 @@ const getToDos = (dispatch: ({ type }: { type: string, payload: object }) => voi
     const data = await get(id);
     dispatch({ type: 'get_todos', payload: data })
 }
+const getSearchToDos = (dispatch: ({ type }: { type: string, payload: object }) => void) => async (searchInputValue: string) => {
+    const data = await getAllToDos()
+    const searchMatches = await data.filter((toDo: ToDoInterface) => toDo.title.toLowerCase().includes(searchInputValue))
+    dispatch({ type: 'get_todos', payload: searchMatches })
+}
 const editToDo = (dispatch: ({ type }: { type: string, payload: object }) => void) => async (oldId: number, id: number, title: String, description: String, createdAt: Date, updatedAt: Date, optionalDescription: string, priorityLevel: number, categoryId: number) => {
     await addBook(id, title, description, createdAt, updatedAt, optionalDescription, priorityLevel, categoryId)
     await deleteToDoInIndexedDB(oldId)
@@ -48,8 +54,7 @@ const getCategories = (dispatch: ({ type }: { type: string, payload: object }) =
     const data = await getCategoriesFromIndexedDB();
     dispatch({ type: 'get_categories', payload: data })
 }
-
 export const { Context, Provider } = createDataContext(
-    todoReducer, { addToDo, getToDos, addCategory, getCategories, deleteToDo, editToDo },
+    todoReducer, { addToDo, getToDos, addCategory, getCategories, deleteToDo, editToDo, getSearchToDos },
     { toDos: [], categories: [] }
 )

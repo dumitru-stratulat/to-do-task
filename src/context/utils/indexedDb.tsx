@@ -1,10 +1,10 @@
 
-import { openDB } from 'idb/with-async-ittr.js';
+import { openDB } from 'idb';
 
 let db: any;
 init();
 
-async function init() {
+export async function init() {
     db = await openDB('ToDoTaskDatabase', 1, {
         upgrade(db) {
             const store = db.createObjectStore('ToDoStore', {
@@ -32,7 +32,11 @@ export const get = async (id: number) => {
     let todo = await db.getAllFromIndex('ToDoStore', 'categoryId', id)
     return todo
 }
-
+export const getAllToDos = async () => {
+    await init();
+    let todo = await db.getAllFromIndex('ToDoStore', 'categoryId')
+    return todo
+}
 export const getCategories = async () => {
     await initCategoryDatabase();
     let categories = await db.getAllFromIndex('CategoryStore', 'createdAt')
