@@ -1,6 +1,23 @@
+.searchBar-wrap {
+  display: flex;
+  justify-content: center;
+}
+.cardButton {
+  align-self: center;
+  width: 50px;
+  margin-bottom: 5px;
+}
+.searchBar {
+  width: 512px;
+  height: 30px;
+  border-radius: 8px;
+}
+.searchBarButton {
+  height: 30px;
+  margin-top: 3px;
+}
 .toDoAppContent {
   display: flex;
-  border: 1px solid blue;
 }
 .todoCard-wrap {
   display: flex;
@@ -28,10 +45,54 @@
   background: rgba(0, 0, 0, 0.4);
   align-items: center;
 }
-.modal-wrap * {
-  height: 20px;
-}
 .modal {
+  width: 300px;
+  height: 250px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  border-radius: 20px;
+  border: 1px solid #4444ff;
+}
+.modal * {
+  width: 200px;
+  height: 20px;
+  margin: 10px;
+}
+.modal div {
+  display: flex;
+  justify-content: space-around;
+}
+.modal button {
+  width: 60px;
+  height: 20px;
+  margin: 5px;
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid #4444ff;
+  border-radius: 5px;
+}
+.modal button:hover {
+  background-color: aliceblue;
+}
+.openModalButton {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  right: 5%;
+  bottom: 10%;
+  font-size: 35px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+  border: 1px solid black;
+}
+.openModalButton :hover {
+  background-color: black;
 }
 
 .deleteCardButton-wrap {
@@ -51,7 +112,6 @@
   width: 300px;
   text-align: center;
   margin: 20px;
-  border: 1px solid blue;
   border-radius: 10px;
   box-shadow: -18px 10px 99px -30px;
   display: flex;
@@ -65,6 +125,10 @@
   box-shadow: -18px 10px 99px -30px;
   margin: 5px;
   cursor: pointer;
+}
+.addCategory-wrap * {
+  height: 30px;
+  margin-left: 5px;
 }
 
 .App-link {

@@ -1,10 +1,9 @@
 import React, { useRef, useState } from 'react';
-import { ToDoModalProps } from './interfaces'
+import { ToDoModalProps } from '../interfaces'
 import { useParams } from 'react-router-dom'
 
-export const ToDoModal: React.FC<ToDoModalProps> = ({ onAdd }) => {
+export const ToDoModal: React.FC<ToDoModalProps> = ({ onAdd, handleShowModal }) => {
     let { categoryId } = useParams();
-    //toDos
     const toDoId = Date.now();
     const toDoTitleInput = useRef<HTMLInputElement>(null)
     const descriptionInput = useRef<HTMLInputElement>(null)
@@ -26,17 +25,19 @@ export const ToDoModal: React.FC<ToDoModalProps> = ({ onAdd }) => {
             toDoCategoryId
         )
     }
+    const closeModal = () => handleShowModal()
     return (
         <div className="modal-wrap">
-            ToDoModal
             <div className="modal">
                 <input ref={toDoTitleInput} type="text" placeholder="Add Title" defaultValue="Title" className="addTitleInput" />
                 <input ref={descriptionInput} type="text" placeholder="Add description" defaultValue="Description" />
                 <input ref={optionalDescriptionInput} type="text" placeholder="Add optional description" defaultValue="optioal description" />
                 <input ref={priorityLevelInput} type="number" placeholder="Add optional description" defaultValue={1} />
-                <input type="button" name="Add ToDo" value="Add" onClick={addTaskHandler} />
-                <h3>Add category</h3>
+                <div>
+                    <button onClick={addTaskHandler} >Add</button>
+                    <button onClick={closeModal} >Cancel</button>
+                </div>
             </div>
-        </div>
+        </div >
     )
 }

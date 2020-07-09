@@ -27,4 +27,15 @@ export interface ToDoModalProps {
         priorityLevel: number,
         categoryId: number
     ): void
+    handleShowModal(): void
+}
+export interface addToDoInterface {
+    id: number,
+    title: String,
+    description: String,
+    createdAt: Date,
+    updatedAt: Date,
+    optionalDescription: string,
+    priorityLevel: number,
+    categoryId: number
 }

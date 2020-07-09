@@ -46,7 +46,6 @@ export const getCategories = async () => {
 async function clearBooks() {
     let tx = db.transaction('ToDoStore', 'readwrite');
     await tx.objectStore('ToDoStore').clear();
-    // await get();
 }
 
 export const addBook = async (id: number, title: String, description: String, createdAt: Date, updatedAt: Date, optionalDescription: string, priorityLevel: number, categoryId: number) => {

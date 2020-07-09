@@ -1,11 +1,10 @@
 import createDataContext from './createDataContext'
-import { ToDoInterface } from '../components/interfaces'
+import { ToDoInterface, addToDoInterface } from '../components/interfaces'
 import { get, getAllToDos, addBook, getCategories as getCategoriesFromIndexedDB, addCategory as addCategoryInIndexedDB, deleteToDo as deleteToDoInIndexedDB } from './utils/indexedDb'
 
 type Actions =
     | { type: 'get_todos'; payload: object }
     | { type: 'get_categories'; payload: object }
-    | { type: "remove"; idx: number };
 
 interface Todo {
     text: string;
@@ -26,29 +25,68 @@ const todoReducer = (state: State, action: Actions) => {
     }
 }
 
-const addToDo = () => (id: number, title: String, description: String, createdAt: Date, updatedAt: Date, optionalDescription: string, priorityLevel: number, categoryId: number) => {
-    addBook(id, title, description, createdAt, updatedAt, optionalDescription, priorityLevel, categoryId);
+const addToDo = () => (
+    id: number,
+    title: String,
+    description: String,
+    createdAt: Date,
+    updatedAt: Date,
+    optionalDescription: string,
+    priorityLevel: number,
+    categoryId: number
+) => {
+
+    addBook(
+        id,
+        title,
+        description,
+        createdAt,
+        updatedAt,
+        optionalDescription,
+        priorityLevel,
+        categoryId);
 }
-const addCategory = () => (categoryId: number, categoryTitleInput: string, categoryToDosId: Array<number>, categoryCreatedAt: Date, categoryUpdatedAt: Date) => {
-    addCategoryInIndexedDB(categoryId, categoryTitleInput, categoryToDosId, categoryCreatedAt, categoryUpdatedAt)
+const addCategory = () => (
+    categoryId: number,
+    categoryTitleInput: string,
+    categoryToDosId: Array<number>,
+    categoryCreatedAt: Date,
+    categoryUpdatedAt: Date
+) => {
+    addCategoryInIndexedDB(
+        categoryId,
+        categoryTitleInput,
+        categoryToDosId,
+        categoryCreatedAt,
+        categoryUpdatedAt)
 }
+
 const getToDos = (dispatch: ({ type }: { type: string, payload: object }) => void) => async (id: number) => {
     const data = await get(id);
     dispatch({ type: 'get_todos', payload: data })
 }
-const getSearchToDos = (dispatch: ({ type }: { type: string, payload: object }) => void) => async (searchInputValue: string) => {
-    const data = await getAllToDos()
-    const searchMatches = await data.filter((toDo: ToDoInterface) => toDo.title.toLowerCase().includes(searchInputValue))
-    dispatch({ type: 'get_todos', payload: searchMatches })
-}
-const editToDo = (dispatch: ({ type }: { type: string, payload: object }) => void) => async (oldId: number, id: number, title: String, description: String, createdAt: Date, updatedAt: Date, optionalDescription: string, priorityLevel: number, categoryId: number) => {
+const getSearchToDos = (dispatch: ({ type }: { type: string, payload: object }) => void) =>
+    async (searchInputValue: string) => {
+        const data = await getAllToDos()
+        const searchMatches = await data.filter((toDo: ToDoInterface) => toDo.title.includes(searchInputValue))
+        dispatch({ type: 'get_todos', payload: searchMatches })
+    }
+const editToDo = () => async (
+    oldId: number,
+    id: number,
+    title: String,
+    description: String,
+    createdAt: Date,
+    updatedAt: Date,
+    optionalDescription: string,
+    priorityLevel: number,
+    categoryId: number
+) => {
     await addBook(id, title, description, createdAt, updatedAt, optionalDescription, priorityLevel, categoryId)
     await deleteToDoInIndexedDB(oldId)
 }
-const deleteToDo = (dispatch: ({ type }: { type: string, payload: object }) => void) => async (id: number) => {
+const deleteToDo = () => async (id: number) => {
     deleteToDoInIndexedDB(id)
-    // const data = await get(id);
-    // dispatch({ type: 'get_todos', payload: data })
 }
 const getCategories = (dispatch: ({ type }: { type: string, payload: object }) => void) => async () => {
     const data = await getCategoriesFromIndexedDB();

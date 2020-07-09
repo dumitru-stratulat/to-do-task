@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useRef } from 'react';
-import { Context } from '../context/ToDoContext';
-import { ToDoInterface } from './interfaces';
+import { Context } from '../../context/ToDoContext';
+import { ToDoInterface } from '../interfaces';
 import { DeleteCardButton } from './DeleteCardButton'
 
 export const ToDoCard: React.FC<{ toDo: ToDoInterface }> = ({ toDo }) => {
@@ -9,6 +9,7 @@ export const ToDoCard: React.FC<{ toDo: ToDoInterface }> = ({ toDo }) => {
     const toDoTitleInput = useRef<HTMLInputElement>(null)
     const descriptionInput = useRef<HTMLInputElement>(null)
     const optionalDescriptionInput = useRef<HTMLInputElement>(null)
+    const priorityLevelInput = useRef<HTMLInputElement>(null)
     const updatedAt = new Date();
     const oldToDoId = toDo.id; // to make create and delete as edit in indexedDB 
 
@@ -21,20 +22,22 @@ export const ToDoCard: React.FC<{ toDo: ToDoInterface }> = ({ toDo }) => {
             toDo.createdAt,
             updatedAt,
             optionalDescriptionInput.current!.value,
-            toDo.priorityLevel,
+            priorityLevelInput,
             toDo.categoryId)
     }
     return (
         <div className="todoCard" >
             <DeleteCardButton toDoId={toDo.id} />
-            <input ref={toDoTitleInput} type="text" placeholder="Add Title" defaultValue={toDo.title} className="editTaskInput" />
-            <input ref={descriptionInput} type="text" placeholder="Add description" defaultValue={toDo.description} className="editTaskInput" />
-            <input ref={optionalDescriptionInput} type="text" placeholder="Add optional description" defaultValue={toDo.optionalDescription} className="editTaskInput" />
-            <p>Priority:{toDo.priorityLevel}</p>
+            <input ref={toDoTitleInput} type="text" placeholder="Add Title" value={toDo.title} className="editTaskInput" />
+            <input ref={descriptionInput} type="text" placeholder="Add description" value={toDo.description} className="editTaskInput" />
+            <input ref={optionalDescriptionInput} type="text" placeholder="Add optional description" value={toDo.optionalDescription} className="editTaskInput" />
+            Priority:
+            <input ref={priorityLevelInput} type="number" placeholder="Add optional description" value={toDo.priorityLevel} className="editTaskInput" />
+
             {/* <p>{[toDo.createdAt]}</p> */}
             {/* <p>{toDo.updatedAt}</p> */}
             <p>{toDo.categoryId}</p>
-            <input type="button" name="Add ToDo" value="Save" onClick={editTaskHandler} />
+            <input type="button" name="Add ToDo" value="Save" onClick={editTaskHandler} className="cardButton" />
         </div>
     )
 }
